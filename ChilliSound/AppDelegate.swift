@@ -8,19 +8,21 @@
 
 import Cocoa
 
-@NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
-
-
+    var windowController: MainViewController?
+    
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        // Insert code here to initialize your application
+        let window = NSWindow(contentRect: NSRect(origin: CGPointZero, size: mainWindowSize), styleMask: NSBorderlessWindowMask, backing: NSBackingStoreType.Buffered, defer: false)
+        window.backgroundColor = NSColor.whiteColor()
+        windowController = MainViewController(window: window)
+        NSApplication.sharedApplication().mainWindow?.windowController = windowController
+        window.delegate = windowController
+        window.center()
+        windowController?.showWindow(self)
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
     }
-
-
 }
 
